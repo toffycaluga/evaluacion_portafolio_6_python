@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Productos{% endblock %}
+{% block content %}
+  <h2>Productos</h2>
+  {% if perms.catalog.add_product %}
+    <p><a href="{% url 'product_create' %}">+ Crear Producto</a></p>
+  {% endif %}
+
+  <table>
+    <thead><tr><th>Nombre</th><th>SKU</th><th>Precio</th><th>Activo</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for p in products %}
+      <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.sku }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.is_active }}</td>
+        <td>
+          {% if perms.catalog.change_product %}
+            <a href="{% url 'product_edit' p.pk %}">Editar</a>
+          {% endif %}
+          {% if perms.catalog.delete_product %}
+            <a href="{% url 'product_delete' p.pk %}">Eliminar</a>
+          {% endif %}
+          {% if perms.catalog.can_mark_inactive and p.is_active %}
+            <a href="{% url 'product_mark_inactive' p.pk %}">Marcar inactivo</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5">No hay productos.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
