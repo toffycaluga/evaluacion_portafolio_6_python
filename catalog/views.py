@@ -5,6 +5,10 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render
+
+
 from .models import Product
 from .forms import ProductForm
 
@@ -58,3 +62,15 @@ def product_mark_inactive(request, pk):
     product.save()
     messages.info(request, f"{product.name} marcado como inactivo.")
     return redirect("product_list")
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Cuenta creada. Ahora puedes iniciar sesión.")
+            return redirect("login")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/register.html", {"form": form})
