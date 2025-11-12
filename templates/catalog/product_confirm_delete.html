@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Eliminar{% endblock %}
 {% block content %}
-  <h2>Eliminar "{{ object }}"</h2>
-  <form method="post">
-    {% csrf_token %}
-    <p>¿Confirmas eliminarlo?</p>
-    <button type="submit">Sí, eliminar</button>
-  </form>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card border-danger-subtle">
+      <div class="card-body">
+        <h1 class="h5 mb-3">Eliminar</h1>
+        <p>¿Confirmas eliminar <strong>"{{ object }}"</strong>?</p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a class="btn btn-outline-secondary" href="{% url 'product_list' %}">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

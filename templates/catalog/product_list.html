@@ -1,35 +1,51 @@
 {% extends "base.html" %}
 {% block title %}Productos{% endblock %}
 {% block content %}
-  <h2>Productos</h2>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h2 class="h4 mb-0">Productos</h2>
   {% if perms.catalog.add_product %}
-    <p><a href="{% url 'product_create' %}">+ Crear Producto</a></p>
+    <a href="{% url 'product_create' %}" class="btn btn-primary">+ Crear Producto</a>
   {% endif %}
+</div>
 
-  <table>
-    <thead><tr><th>Nombre</th><th>SKU</th><th>Precio</th><th>Activo</th><th>Acciones</th></tr></thead>
-    <tbody>
-    {% for p in products %}
-      <tr>
-        <td>{{ p.name }}</td>
-        <td>{{ p.sku }}</td>
-        <td>{{ p.price }}</td>
-        <td>{{ p.is_active }}</td>
-        <td>
-          {% if perms.catalog.change_product %}
-            <a href="{% url 'product_edit' p.pk %}">Editar</a>
-          {% endif %}
-          {% if perms.catalog.delete_product %}
-            <a href="{% url 'product_delete' p.pk %}">Eliminar</a>
-          {% endif %}
-          {% if perms.catalog.can_mark_inactive and p.is_active %}
-            <a href="{% url 'product_mark_inactive' p.pk %}">Marcar inactivo</a>
-          {% endif %}
-        </td>
-      </tr>
-    {% empty %}
-      <tr><td colspan="5">No hay productos.</td></tr>
-    {% endfor %}
-    </tbody>
-  </table>
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover table-sm align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th><th>SKU</th><th class="text-end">Precio</th><th>Activo</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for p in products %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td><code>{{ p.sku }}</code></td>
+          <td class="text-end">{{ p.price }}</td>
+          <td>
+            {% if p.is_active %}
+              <span class="badge text-bg-success">Sí</span>
+            {% else %}
+              <span class="badge text-bg-secondary">No</span>
+            {% endif %}
+          </td>
+          <td class="d-flex gap-2">
+            {% if perms.catalog.change_product %}
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'product_edit' p.pk %}">Editar</a>
+            {% endif %}
+            {% if perms.catalog.delete_product %}
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'product_delete' p.pk %}">Eliminar</a>
+            {% endif %}
+            {% if perms.catalog.can_mark_inactive and p.is_active %}
+              <a class="btn btn-outline-warning btn-sm" href="{% url 'product_mark_inactive' p.pk %}">Marcar inactivo</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5" class="text-center text-muted py-4">No hay productos.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}
