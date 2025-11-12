@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Agregar ítem{% endblock %}
+{% block content %}
+<h2 class="h5 mb-3">Agregar ítem a Pedido #{{ order.id }}</h2>
+<form method="post" novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary" type="submit">Agregar</button>
+    <a class="btn btn-outline-secondary" href="{% url 'order_detail' order.pk %}">Volver</a>
+  </div>
+</form>
+{% endblock %}
