@@ -1,0 +1,4 @@
+[
+  {"model": "catalog.product", "pk": 1, "fields": {"name": "Malabares Pro", "sku": "MB-001", "price": "39.90", "is_active": true}},
+  {"model": "catalog.product", "pk": 2, "fields": {"name": "Nariz de Payaso", "sku": "NP-002", "price": "5.00", "is_active": true}}
+]
