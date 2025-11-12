@@ -97,6 +97,10 @@ Este proyecto corresponde a la **Evaluación de Portafolio del Módulo 7**, cent
 Se desarrolla como una continuación del portafolio anterior, pero en una **rama independiente** llamada `feature/m7-db`.
 
 ---
+## 📂 Ver el Módulo 7
+Para ver el desarrollo del Módulo 7 (Integración con Bases de Datos en Django),  
+entra directamente a la rama 👉 [feature/m7-db](https://github.com/toffycaluga/evaluacion_portafolio_6_python/tree/feature/m7-db)
+
 
 ## 🧭 Cambio de rama
 
