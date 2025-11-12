@@ -1,0 +1,5 @@
+body { font-family: system-ui, sans-serif; margin: 1rem; }
+nav a { margin-right: .75rem; }
+.flash { background: #eef; padding: .5rem; margin: .5rem 0; border: 1px solid #cce; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ddd; padding: .5rem; }
