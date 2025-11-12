@@ -83,12 +83,44 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# --- DATABASES ---
+# Por defecto usamos SQLite (ideal para desarrollo y pruebas).
+# Para producción se recomienda PostgreSQL. Abajo hay ejemplos configurables por variables de entorno.
+
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# --- Ejemplo PostgreSQL ---
+# Descomenta y configura variables de entorno si quieres usar Postgres:
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("PGDATABASE", "django_portfolio"),
+#         "USER": os.getenv("PGUSER", "postgres"),
+#         "PASSWORD": os.getenv("PGPASSWORD", ""),
+#         "HOST": os.getenv("PGHOST", "127.0.0.1"),
+#         "PORT": os.getenv("PGPORT", "5432"),
+#     }
+# }
+
+# --- Ejemplo MySQL ---
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": os.getenv("MYSQL_DATABASE", "django_portfolio"),
+#         "USER": os.getenv("MYSQL_USER", "root"),
+#         "PASSWORD": os.getenv("MYSQL_PASSWORD", ""),
+#         "HOST": os.getenv("MYSQL_HOST", "127.0.0.1"),
+#         "PORT": os.getenv("MYSQL_PORT", "3306"),
+#         "OPTIONS": {"charset": "utf8mb4"},
+#     }
+# }
 
 
 # Password validation
