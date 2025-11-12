@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.models import Group
 
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
@@ -68,9 +69,11 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            readers, _ = Group.objects.get_or_create(name="Readers")
+            user.groups.add(readers)
             messages.success(request, "Cuenta creada. Ahora puedes iniciar sesión.")
             return redirect("login")
-    else:
+    else:   
         form = UserCreationForm()
     return render(request, "registration/register.html", {"form": form})
