@@ -23,4 +23,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),  # login, logout, password views
     path('', HomeView.as_view(), name='home'),
     path('catalog/', include('catalog.urls')),
+    
+    # M7: rutas de integración BD
+    path('sales/', include('sales.urls')),
 ]
